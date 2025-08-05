@@ -1,0 +1,195 @@
+{
+  "pizzaTeige": {
+    "waldis-pizza": {
+      "name": "Waldis Pizzateig",
+      "shortDescription": "Klassischer italienischer Stil",
+      "longDescription": "Ein traditioneller Pizzateig nach italienischer Art, inspiriert von Waldi's Rezept. Perfekt für dünn gebackene, aromatische Pizzen mit knusprigem Rand.",
+      "ratios": {
+        "flour": 1000,
+        "water": 650,
+        "salt": 30,
+        "yeast": 1.5,
+        "oil": 15
+      },
+      "defaults": {
+        "balls": 6,
+        "ball_weight": 282.75
+      },
+      "hydration": 65,
+      "fermentation": [
+        {
+          "name": "Autolyse (RT)",
+          "time": "1h",
+          "temperature": "21-23°C"
+        },
+        {
+          "name": "Stockgare (KT)",
+          "time": "24h",
+          "temperature": "4°C"
+        },
+        {
+          "name": "Stückgare (KT)",
+          "time": "24h",
+          "temperature": "4°C"
+        },
+        {
+          "name": "Vor dem Backen (RT)",
+          "time": "4-5h",
+          "temperature": "21-23°C"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "title": "Mehl & Wasser",
+          "detail": "Das Mehl komplett in die Teigschüssel (oder Knetmaschine) und 90% der Wassermenge dazugeben."
+        },
+        {
+          "step": 2,
+          "title": "Mischen & Autolyse",
+          "detail": "Das Mehl-Wasser-Gemisch ganz grob mischen und danach für ca. 30 Minuten abgedeckt, bei Raumtemperatur, ruhen lassen (Autolyse)."
+        },
+        {
+          "step": 3,
+          "title": "Hefe lösen",
+          "detail": "In der Zwischenzeit die Hefe in die restlichen 10% Wasser bröckeln, sodass diese sich im Wasser auflöst."
+        },
+        {
+          "step": 4,
+          "title": "Hefewasser zugeben",
+          "detail": "Nach der 30-minütigen Ruhephase kommt das Hefe-Wasser-Gemisch in den Teig."
+        },
+        {
+          "step": 5,
+          "title": "Öl einarbeiten",
+          "detail": "Nun das Olivenöl dazu geben und für ca. 3 Minuten kneten."
+        },
+        {
+          "step": 6,
+          "title": "Salz einarbeiten & Kneten",
+          "detail": "Jetzt noch die letzte Zutat, das Salz, hinzugeben und den Teig für 15 Minuten gut kneten."
+        },
+        {
+          "step": 7,
+          "title": "Stockgare (KT)",
+          "detail": "Anschließend kommt der Teig in die Pizzaballenbox, wird luftdicht abgedeckt und für mind. 12 Stunden in den Kühlschrank gestellt (4°C)."
+        },
+        {
+          "step": 8,
+          "title": "Teilen & Formen",
+          "detail": "Nach der Stockgare wird der Teig in 6 gleich große Stücke (ca. 280g) geteilt und es werden runde Pizza Teiglinge geformt."
+        },
+        {
+          "step": 9,
+          "title": "Stückgare bei KT",
+          "detail": "Die Teiglinge werden wieder in eine Pizzaballenbox gelegt, mit Deckel verschlossen und nochmals für mind. 12 Std. in den Kühlschrank gestellt."
+        },
+        {
+          "step": 10,
+          "title": "Stückgare bei RT",
+          "detail": "Vor der finalen Zubereitung den Pizzateig aus dem Kühlschrank nehmen und ca. 4-5 Stunden bei Raumtemperatur gehen lassen."
+        },
+        {
+          "step": 11,
+          "title": "Ergebnis",
+          "detail": "Luftig, lockerer und intensiver Pizzateig wie in Italien."
+        }
+      ]
+    },
+    "Max Standard": {
+      "name": "Max Standard Pizzateig",
+      "shortDescription": "schnell und einfach",
+      "longDescription": "Ein einfacher und schneller Pizzateig, der in kürzester Zeit zubereitet werden kann. Ideal für spontane Pizzaabende.",
+      "ratios": {
+        "flour": 1000,
+        "water": 650,
+        "salt": 35,
+        "yeast": 1.5
+      },
+      "defaults": {
+        "balls": 6,
+        "ball_weight": 281.1
+      },
+      "hydration": 65,
+      "fermentation": [
+        {
+          "name": "Autolyse (RT)",
+          "time": "1h",
+          "temperature": "21-23°C"
+        },
+        {
+          "name": "Stockgare (KT)",
+          "time": "48h",
+          "temperature": "4°C"
+        },
+        {
+          "name": "Stückgare (KT)",
+          "time": "24h",
+          "temperature": "4°C"
+        },
+        {
+          "name": "Vor dem Backen (RT)",
+          "time": "2h",
+          "temperature": "21-23°C"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "title": "Mehl & Wasser",
+          "detail": "Das Mehl komplett in die Teigschüssel (oder Knetmaschine) und 90% der Wassermenge dazugeben."
+        },
+        {
+          "step": 2,
+          "title": "Mischen & Autolyse",
+          "detail": "Das Mehl-Wasser-Gemisch ganz grob mischen und danach für ca. 30 Minuten abgedeckt, bei Raumtemperatur, ruhen lassen (Autolyse)."
+        },
+        {
+          "step": 3,
+          "title": "Hefe lösen",
+          "detail": "In der Zwischenzeit die Hefe in die restlichen 10% Wasser bröckeln, sodass diese sich im Wasser auflöst."
+        },
+        {
+          "step": 4,
+          "title": "Hefewasser zugeben",
+          "detail": "Nach der 30-minütigen Ruhephase kommt das Hefe-Wasser-Gemisch in den Teig."
+        },
+        {
+          "step": 5,
+          "title": "Öl einarbeiten",
+          "detail": "Nun das Olivenöl dazu geben und für ca. 3 Minuten kneten."
+        },
+        {
+          "step": 6,
+          "title": "Salz einarbeiten & Kneten",
+          "detail": "Jetzt noch die letzte Zutat, das Salz, hinzugeben und den Teig für 15 Minuten gut kneten."
+        },
+        {
+          "step": 7,
+          "title": "Stockgare (KT)",
+          "detail": "Anschließend kommt der Teig in die Pizzaballenbox, wird luftdicht abgedeckt und für mind. 12 Stunden in den Kühlschrank gestellt (4°C)."
+        },
+        {
+          "step": 8,
+          "title": "Teilen & Formen",
+          "detail": "Nach der Stockgare wird der Teig in 6 gleich große Stücke (ca. 280g) geteilt und es werden runde Pizza Teiglinge geformt."
+        },
+        {
+          "step": 9,
+          "title": "Stückgare bei KT",
+          "detail": "Die Teiglinge werden wieder in eine Pizzaballenbox gelegt, mit Deckel verschlossen und nochmals für mind. 12 Std. in den Kühlschrank gestellt."
+        },
+        {
+          "step": 10,
+          "title": "Stückgare bei RT",
+          "detail": "Vor der finalen Zubereitung den Pizzateig aus dem Kühlschrank nehmen und ca. 4-5 Stunden bei Raumtemperatur gehen lassen."
+        },
+        {
+          "step": 11,
+          "title": "Ergebnis",
+          "detail": "Luftig, lockerer und intensiver Pizzateig wie in Italien."
+        }
+      ]
+    }
+  }
+}
