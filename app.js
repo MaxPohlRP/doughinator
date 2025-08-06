@@ -29,6 +29,18 @@ function calculate() {
   const ballCount = parseInt(document.getElementById('ballCount').value);
   const ballWeight = parseFloat(document.getElementById('ballWeight').value);
 
+  const zutatenNamen = {
+    flour: "Mehl (Tipo 00)",
+    water: "Wasser (Eiskaltes)",
+    salt: "Salz (wenn möglich Meersalz)",
+    yeast: "Hefe frisch",
+    oil: "Olivenöl",
+    biga: "Biga"
+  };
+
+  const ingredientsList = document.getElementById('ingredientsList');
+  ingredientsList.innerHTML = '';
+
   if (!ballCount || !ballWeight || ballCount < 1 || ballWeight < 50) {
     document.getElementById('results').style.display = 'none';
     return;
@@ -45,59 +57,153 @@ function calculate() {
   if (errorDiv) errorDiv.textContent = '';
 
   const totalWeight = ballCount * ballWeight;
-  const totalRatio = Object.values(recipe.ratios).reduce((sum, val) => sum + val, 0);
-  const scaleFactor = totalWeight / totalRatio;
+  let totalRatio = 0;
+  let scaleFactor = 1;
 
-  const ingredients = [];
-  for (const [key, val] of Object.entries(recipe.ratios)) {
-    let unit = 'g';
-    if (key === 'water' || key === 'oil') unit = 'ml';
+  if (recipe.ratios) {
+    totalRatio = Object.values(recipe.ratios).reduce((sum, val) => sum + val, 0);
+    scaleFactor = totalWeight / totalRatio;
 
-    const rawAmount = val * scaleFactor;
-    let amount;
-    if (key === 'yeast' || key === 'salt') {
-      amount = rawAmount.toFixed(2);
-    } else {
-      amount = Math.round(rawAmount);
-    }
-    ingredients.push({ name: getZutatName(key), amount, unit });
+    Object.entries(recipe.ratios).forEach(([key, value]) => {
+      let li = document.createElement('li');
+      li.textContent = `${Math.round(value * scaleFactor)}g : ${zutatenNamen[key] || key}`;
+      ingredientsList.appendChild(li);
+    });
+  } else if (recipe.vorteig && recipe.hauptteig) {
+    // Zutaten aus Vorteig und Hauptteig zusammenzählen
+    const vorteigSum = Object.values(recipe.vorteig.ratios).reduce((sum, val) => sum + val, 0);
+    const hauptteigSum = Object.values(recipe.hauptteig.ratios).reduce((sum, val) => sum + val, 0);
+    totalRatio = vorteigSum + hauptteigSum;
+    scaleFactor = totalWeight / totalRatio;
+
+    // Vorteig Überschrift
+    let vorteigHeader = document.createElement('h3');
+    vorteigHeader.textContent = 'Vorteig';
+    ingredientsList.appendChild(vorteigHeader);
+
+    // Vorteig Zutaten skaliert
+    Object.entries(recipe.vorteig.ratios).forEach(([key, value]) => {
+      let li = document.createElement('li');
+      if (key === 'yeast' || key === 'salt') {
+        li.textContent = `${(value * scaleFactor).toFixed(2)}g : ${zutatenNamen[key] || key}`;
+      } else {
+        li.textContent = `${(value * scaleFactor).toFixed(0)}g : ${zutatenNamen[key] || key}`;
+      }
+      ingredientsList.appendChild(li);
+    });
+
+    // Hauptteig Überschrift
+    let hauptteigHeader = document.createElement('h3');
+    hauptteigHeader.textContent = 'Hauptteig';
+    ingredientsList.appendChild(hauptteigHeader);
+
+    // Vorteig-Masse berechnen und als erste Zutat im Hauptteig listen
+    const vorteigMasse = Object.values(recipe.vorteig.ratios).reduce((sum, val) => sum + val, 0) * scaleFactor;
+    let vorteigLi = document.createElement('li');
+    vorteigLi.textContent = `${vorteigMasse.toFixed(0)}g : Vorteig`;
+    ingredientsList.appendChild(vorteigLi);
+
+    // Hauptteig Zutaten skaliert
+    Object.entries(recipe.hauptteig.ratios).forEach(([key, value]) => {
+      let li = document.createElement('li');
+
+      if (key === 'yeast' || key === 'salt') {
+        li.textContent = `${(value * scaleFactor).toFixed(2)}g : ${zutatenNamen[key] || key}`;
+      } else {
+        li.textContent = `${(value * scaleFactor).toFixed(0)}g : ${zutatenNamen[key] || key}`;
+      }
+
+
+      ingredientsList.appendChild(li);
+    });
+  } else {
+    ingredientsList.innerHTML = '<li>Keine Zutaten gefunden!</li>';
   }
-
-  // Zutatenliste
-  const list = document.getElementById('ingredientsList');
-  list.innerHTML = '';
-  ingredients.forEach(ing => {
-    const li = document.createElement('li');
-    li.innerHTML = `<strong>${ing.amount} ${ing.unit}</strong> ${ing.name}`;
-    list.appendChild(li);
-  });
 
   // Beschreibung
   document.getElementById('description').textContent = recipe.shortDescription || '';
   document.getElementById('longDescription').textContent = recipe.longDescription || '';
 
-  // Fermentation
+  // Fermentation anzeigen
   const fermentationList = document.getElementById('fermentationList');
   fermentationList.innerHTML = '';
-  if (Array.isArray(recipe.fermentation)) {
+  if (recipe.fermentation) {
+    // Standard-Rezept
     recipe.fermentation.forEach(step => {
+      const li = document.createElement('li');
+      li.textContent = `${step.name}: ${step.time}, ${step.temperature}`;
+      fermentationList.appendChild(li);
+    });
+  } else if (recipe.vorteig && recipe.hauptteig) {
+    // Vorteig-Gärzeiten
+    let vorteigHeader = document.createElement('h3');
+    vorteigHeader.textContent = 'Vorteig Gärzeiten';
+    fermentationList.appendChild(vorteigHeader);
+    recipe.vorteig.fermentation.forEach(step => {
+      const li = document.createElement('li');
+      li.textContent = `${step.name}: ${step.time}, ${step.temperature}`;
+      fermentationList.appendChild(li);
+    });
+    // Hauptteig-Gärzeiten
+    let hauptteigHeader = document.createElement('h3');
+    hauptteigHeader.textContent = 'Hauptteig Gärzeiten';
+    fermentationList.appendChild(hauptteigHeader);
+    recipe.hauptteig.fermentation.forEach(step => {
       const li = document.createElement('li');
       li.textContent = `${step.name}: ${step.time}, ${step.temperature}`;
       fermentationList.appendChild(li);
     });
   }
 
-  // Anleitung
+  // Arbeitsschritte anzeigen
   const instructionsList = document.getElementById('instructionsList');
   instructionsList.innerHTML = '';
-  if (Array.isArray(recipe.instructions)) {
-    recipe.instructions.forEach((step) => {
+  if (recipe.instructions) {
+    // Standard-Rezept
+    recipe.instructions.forEach((step, idx) => {
       const li = document.createElement('li');
-      li.className = 'instruction-item';
       li.innerHTML = `
-        <div class="instruction-content">
-          <div class="instruction-title">${step.title}</div>
-          <div class="instruction-detail">${step.detail}</div>
+        <div style="display:flex;align-items:flex-start;">
+          <div style="font-weight:bold;font-size:1.2em;margin-right:0.7em;"></div>
+          <div>
+            <div style="font-weight:bold;">${step.title}</div>
+            <div>${step.detail}</div>
+          </div>
+        </div>
+      `;
+      instructionsList.appendChild(li);
+    });
+  } else if (recipe.vorteig && recipe.hauptteig) {
+    // Vorteig-Arbeitsschritte
+    let vorteigHeader = document.createElement('h3');
+    vorteigHeader.textContent = 'Vorteig Arbeitsschritte';
+    instructionsList.appendChild(vorteigHeader);
+    recipe.vorteig.instructions.forEach((step, idx) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div style="display:flex;align-items:flex-start;">
+          <div style="font-weight:bold;font-size:1.2em;margin-right:0.7em;"></div>
+          <div>
+            <div style="font-weight:bold;">${step.title}</div>
+            <div>${step.detail}</div>
+          </div>
+        </div>
+      `;
+      instructionsList.appendChild(li);
+    });
+    // Hauptteig-Arbeitsschritte
+    let hauptteigHeader = document.createElement('h3');
+    hauptteigHeader.textContent = 'Hauptteig Arbeitsschritte';
+    instructionsList.appendChild(hauptteigHeader);
+    recipe.hauptteig.instructions.forEach((step, idx) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div style="display:flex;align-items:flex-start;">
+          <div style="font-weight:bold;font-size:1.2em;margin-right:0.7em;"></div>
+          <div>
+            <div style="font-weight:bold;">${step.title}</div>
+            <div>${step.detail}</div>
+          </div>
         </div>
       `;
       instructionsList.appendChild(li);
@@ -106,8 +212,8 @@ function calculate() {
 
   // Weitere Anzeigen
   document.getElementById('totalWeight').textContent = `${ballCount} × ${ballWeight}g`;
-  document.getElementById('totalWeightDisplay').textContent = `${totalWeight}g`;
-  document.getElementById('hydrationDisplay').textContent = `${recipe.hydration}%`;
+  document.getElementById('totalWeightDisplay').textContent = `${totalWeight.toFixed(2)}g`;
+  document.getElementById('hydrationDisplay').textContent = `${recipe.hydration ? recipe.hydration : '-'}%`;
 
   document.getElementById('results').style.display = 'block';
 }
@@ -130,6 +236,42 @@ function setDefaultsForSelectedRecipe() {
     document.getElementById('ballCount').value = recipe.defaults.balls;
     document.getElementById('ballWeight').value = recipe.defaults.ball_weight;
   }
+}
+
+function showRecipe(recipe) {
+  // Zutaten
+  let ingredientsList = document.getElementById('ingredientsList');
+  ingredientsList.innerHTML = '';
+
+  if (recipe.vorteig && recipe.hauptteig) {
+    // Zutaten Vorteig
+    let vorteigTitle = document.createElement('li');
+    vorteigTitle.textContent = 'Vorteig:';
+    ingredientsList.appendChild(vorteigTitle);
+    Object.entries(recipe.vorteig.ratios).forEach(([key, value]) => {
+      let li = document.createElement('li');
+      li.textContent = `${key}: ${value}g`;
+      ingredientsList.appendChild(li);
+    });
+    // Zutaten Hauptteig
+    let hauptteigTitle = document.createElement('li');
+    hauptteigTitle.textContent = 'Hauptteig:';
+    ingredientsList.appendChild(hauptteigTitle);
+    Object.entries(recipe.hauptteig.ratios).forEach(([key, value]) => {
+      let li = document.createElement('li');
+      li.textContent = `${key}: ${value}g`;
+      ingredientsList.appendChild(li);
+    });
+  } else {
+    // Zutaten wie bisher
+    Object.entries(recipe.ratios).forEach(([key, value]) => {
+      let li = document.createElement('li');
+      li.textContent = `${key}: ${value}g`;
+      ingredientsList.appendChild(li);
+    });
+  }
+
+  // Fermentation und Arbeitsschritte analog prüfen und anzeigen
 }
 
 // Events
