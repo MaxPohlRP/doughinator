@@ -219,7 +219,7 @@
         },
         "fermentation": [
           {
-            "name": "Biga-Gare (RT)",
+            "name": "Ruhe nach dem Kneten (RT)",
             "time": "1h",
             "temperature": "18°C"
           },
@@ -233,7 +233,7 @@
           {
             "step": 1,
             "title": "Biga ansetzen",
-            "detail": "Mehl, Wasser und Hefe grob vermengen, bis ein trockener, klumpiger Teig entsteht. 16h bei ca. 18°C abgedeckt gehen lassen."
+            "detail": "Mehl, Wasser und Hefe grob vermengen, bis ein trockener, klumpiger Teig entsteht. 24h bei ca. 4°C im Kühlschrank gehen lassen."
           }
         ]
       },
@@ -245,26 +245,21 @@
         },
         "fermentation": [
           {
-            "name": "Stockgare",
-            "time": "4h",
-            "temperature": "21-23°C"
-          },
-          {
-            "name": "Stückgare",
-            "time": "2h",
-            "temperature": "21-23°C"
+            "name": "Stückgare (KT)",
+            "time": "24h",
+            "temperature": "4°C"
           }
         ],
         "instructions": [
           {
             "step": 1,
             "title": "Biga und Zutaten mischen",
-            "detail": "Biga mit restlichem Mehl, Wasser, Salz, Öl und Hefe in die Knetmaschine geben und gut auskneten."
+            "detail": "Biga mit restlichem Wasser, Salz,  und Hefe in die Knetmaschine geben und gut auskneten."
           },
           {
             "step": 2,
-            "title": "Stockgare",
-            "detail": "Den Teig abgedeckt für 4h bei Raumtemperatur gehen lassen."
+            "title": "Dehnen & Falten",
+            "detail": "Den Teig nach dem Kneten dehnen und falten, um Struktur zu entwickeln. Die Arbeitsplatte leicht ölen, damit der Teig nicht klebt. Ca. 1h bei Raumtemperatur abgedeckt ruhen lassen."
           },
           {
             "step": 3,
@@ -274,7 +269,7 @@
           {
             "step": 4,
             "title": "Stückgare",
-            "detail": "Die Teiglinge für 2h bei Raumtemperatur ruhen lassen."
+            "detail": "Die Teiglinge für weiter 24h im Kühlschrank ruhen lassen."
           }
         ]
       }
