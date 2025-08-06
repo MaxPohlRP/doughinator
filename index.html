@@ -16,17 +16,25 @@
       <select id="teigVariante"></select>
     </div>
     
-    <div class="input-group">
-      <label for="ballCount">Anzahl Ballen:</label>
-      <input type="number" id="ballCount" value="6" min="1" />
+    <div class="input-row">
+      <div class="input-group-inline">
+        <label for="ballCount">Anzahl Ballen:</label>
+        <div class="counter-group">
+          <button type="button" class="counter-btn" onclick="decrementValue('ballCount')">-</button>
+          <input type="number" id="ballCount" value="6" min="1" />
+          <button type="button" class="counter-btn" onclick="incrementValue('ballCount')">+</button>
+        </div>
+      </div>
+      
+      <div class="input-group-inline">
+        <label for="ballWeight">Gewicht pro Ballen (g):</label>
+        <div class="counter-group">
+          <button type="button" class="counter-btn" onclick="decrementValue('ballWeight', 10)">-</button>
+          <input type="number" id="ballWeight" value="280" min="1" step="10" />
+          <button type="button" class="counter-btn" onclick="incrementValue('ballWeight', 10)">+</button>
+        </div>
+      </div>
     </div>
-    
-    <div class="input-group">
-      <label for="ballWeight">Gewicht pro Ballen (g):</label>
-      <input type="number" id="ballWeight" value="280" min="1" step="1" />
-    </div>
-    
-    <button onclick="calculate()">Berechnen</button>
   </div>
 
   <div class="results" id="results" style="display: none;">

@@ -282,6 +282,37 @@ document.getElementById('teigVariante').addEventListener('change', () => {
 document.getElementById('ballCount').addEventListener('input', calculate);
 document.getElementById('ballWeight').addEventListener('input', calculate);
 
+// Counter-Funktionen für Buttons
+function incrementValue(elementId, step = 1) {
+  const element = document.getElementById(elementId);
+  const currentValue = parseInt(element.value) || 0;
+  const newValue = currentValue + step;
+  
+  // Minimum-Werte beachten
+  if (elementId === 'ballCount' && newValue >= 1) {
+    element.value = newValue;
+  } else if (elementId === 'ballWeight' && newValue >= 50) {
+    element.value = newValue;
+  }
+  
+  calculate();
+}
+
+function decrementValue(elementId, step = 1) {
+  const element = document.getElementById(elementId);
+  const currentValue = parseInt(element.value) || 0;
+  const newValue = currentValue - step;
+  
+  // Minimum-Werte beachten
+  if (elementId === 'ballCount' && newValue >= 1) {
+    element.value = newValue;
+  } else if (elementId === 'ballWeight' && newValue >= 50) {
+    element.value = newValue;
+  }
+  
+  calculate();
+}
+
 // Init
 async function init() {
   await loadRecipes();

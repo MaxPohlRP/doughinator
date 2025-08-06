@@ -224,3 +224,71 @@ button:hover {
     font-size: 0.85rem;
   }
 }
+
+/* Counter-Layout für Inline-Gruppen */
+.input-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input-group-inline {
+  flex: 1;
+}
+
+.input-group-inline label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.counter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.counter-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.counter-btn:hover {
+  background-color: #b71c1c;
+}
+
+.counter-group input {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Mobile-Anpassungen für Counter */
+@media (max-width: 480px) {
+  .input-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .counter-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+  }
+}
