@@ -246,7 +246,7 @@
         "fermentation": [
           {
             "name": "Stückgare (KT)",
-            "time": "24h",
+            "time": "16-24h",
             "temperature": "4°C"
           }
         ],
@@ -269,7 +269,12 @@
           {
             "step": 4,
             "title": "Stückgare",
-            "detail": "Die Teiglinge für weiter 24h im Kühlschrank ruhen lassen."
+            "detail": "Die Teiglinge für weiter 16h-24h im Kühlschrank ruhen lassen."
+          },
+          {
+            "step": 5,
+            "title": "Vor dem Backen",
+            "detail": "Die Teiglinge 2-3 Stunden vor der Zubereitung aus dem Kühlschrank nehmen und bei Raumtemperatur akklimatisieren lassen."
           }
         ]
       }
