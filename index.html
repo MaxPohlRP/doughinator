@@ -53,11 +53,45 @@
     </div>
   </div>
 
+  <div id="easterEgg" style="display:none; text-align:center; margin-top:2em;">
+    <h2>Benimm dich Emil</h2>
+    <div>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
   <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
   </script>
+  <script>
+  const ballCountInput = document.getElementById('ballCount');
+  const easterEggDiv = document.getElementById('easterEgg');
+
+  function checkEasterEgg() {
+    if (parseInt(ballCountInput.value, 10) > 2000) {
+      easterEggDiv.style.display = 'block';
+    } else {
+      easterEggDiv.style.display = 'none';
+    }
+  }
+
+  ballCountInput.addEventListener('input', checkEasterEgg);
+
+  // Falls die Buttons benutzt werden:
+  function incrementValue(id, step = 1) {
+    const input = document.getElementById(id);
+    input.value = parseInt(input.value, 10) + step;
+    input.dispatchEvent(new Event('input'));
+  }
+  function decrementValue(id, step = 1) {
+    const input = document.getElementById(id);
+    input.value = Math.max(parseInt(input.value, 10) - step, parseInt(input.min, 10) || 1);
+    input.dispatchEvent(new Event('input'));
+  }
+</script>
 </body>
 </html>
